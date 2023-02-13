@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 import { ImSearch } from 'react-icons/im';
@@ -52,7 +52,7 @@ const Movies = () => {
 
   return (
     <div>
-      <Outlet />
+      
       <SearchBar>
         <SearchForm onSubmit={onSubmitForm}>
           <SearchFormButton type="submit">
@@ -77,7 +77,7 @@ const Movies = () => {
           ))}
         </ul>
       )}
-      {/* <Outlet /> */}
+      <Outlet />
     </div>
   );
 };
