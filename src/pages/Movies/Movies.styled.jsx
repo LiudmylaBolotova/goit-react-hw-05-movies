@@ -24,7 +24,7 @@ export const SearchForm = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: ${p => p.theme.sizes.width[4]}px;
+  max-width: ${p => p.theme.sizes.width[5]}px;
 
   background-color: ${p => p.theme.colors.backgroundSearchBar};
   border-radius: ${p => p.theme.radii.round}px;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+// import { Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { ImSearch } from 'react-icons/im';
@@ -14,10 +14,10 @@ import {
   SearchFormInput,
 } from './Movies.styled';
 
-
-export const Movies = () => {
+const Movies = () => {
   const [query, setQuery] = useState('');
   const [ListItems, setListItems] = useState([]);
+  // const location = useLocation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -50,9 +50,9 @@ export const Movies = () => {
     form.reset();
   };
 
-  
   return (
     <div>
+      <Outlet />
       <SearchBar>
         <SearchForm onSubmit={onSubmitForm}>
           <SearchFormButton type="submit">
@@ -66,13 +66,18 @@ export const Movies = () => {
           ></SearchFormInput>
         </SearchForm>
       </SearchBar>
-      {ListItems &&
-        ListItems.map(item => (
-          <Items key={item.id}>
-            <ItemsLink to={`/movies/${item.id}`}>{item.title}</ItemsLink>
-          </Items>
-        ))}
-      <Outlet/>
+      {ListItems && (
+        <ul>
+          {ListItems.map(item => (
+            <Items key={item.id}>
+              <ItemsLink to={`/movies/${item.id}`}>
+                {item.title}
+              </ItemsLink>
+            </Items>
+          ))}
+        </ul>
+      )}
+      {/* <Outlet /> */}
     </div>
   );
 };
