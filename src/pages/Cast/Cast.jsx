@@ -10,7 +10,14 @@ import {
   IMG_URL,
 } from 'pages/Services';
 
-import { ListActors, ItemActor, SecondaryTitle, Text } from './Cast.styled';
+import {
+  ListActors,
+  ItemActor,
+  SecondaryTitle,
+  Text,
+  Card,
+  ImgActor,
+} from './Cast.styled';
 
 const Cast = () => {
   const [castActors, setCastActors] = useState('');
@@ -31,16 +38,18 @@ const Cast = () => {
   }, [castActors, movieId]);
 
   return (
-    <div>
+    <>
       {castActors && (
         <ListActors>
           {castActors.map(item => {
             return (
               <ItemActor key={item.cast_id}>
-                <SecondaryTitle>{item.name}</SecondaryTitle>
-                <Text>{item.character}</Text>
+                <Card>
+                  <SecondaryTitle>{item.name}</SecondaryTitle>
+                  <Text>{item.character}</Text>
+                </Card>
                 {item.profile_path ? (
-                  <img
+                  <ImgActor
                     src={`${IMG_URL}${item.profile_path}`}
                     alt={item.name}
                     width={200}
@@ -56,7 +65,7 @@ const Cast = () => {
           })}
         </ListActors>
       )}
-    </div>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import {
   SearchFormButton,
   SearchFormButtonLabel,
   SearchFormInput,
+  Alert,
 } from './Movies.styled';
 
 const Movies = () => {
@@ -45,12 +46,15 @@ const Movies = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const query = form.elements.query.value;
+    if (query.trim() === '') {
+      return alert('Enter your request!');
+    }
     setQuery(query);
     form.reset();
   };
 
   return (
-    <div>
+    <>
       <SearchBar>
         <SearchForm onSubmit={onSubmitForm}>
           <SearchFormButton type="submit">
@@ -64,7 +68,7 @@ const Movies = () => {
           ></SearchFormInput>
         </SearchForm>
       </SearchBar>
-      {ListItems && (
+      {ListItems.length > 0 ? (
         <ul>
           {ListItems.map(item => (
             <Item key={item.id}>
@@ -72,9 +76,11 @@ const Movies = () => {
             </Item>
           ))}
         </ul>
+      ) : (
+        <Alert>Enter your query in the search bar</Alert>
       )}
       <Outlet />
-    </div>
+    </>
   );
 };
 

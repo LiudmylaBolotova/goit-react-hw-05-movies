@@ -7,20 +7,24 @@ export const ListActors = styled.ul`
 `;
 
 export const ItemActor = styled.li`
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   border: ${p => p.theme.borders.normal};
   box-shadow: 0px 5px 12px -5px;
   background-color: ${p => p.theme.colors.twoBackgroundColor};
 `;
 
-// export const ImgActor = styled.img`
-//   border: ${p => p.theme.borders.middle};
-  
-// `;
+export const ImgActor = styled.img`
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  height: auto;
+  background-position: center;
+`;
 
 export const SecondaryTitle = styled.h3`
-  margin-top: ${p => p.theme.space[4]}px;
-
   color: ${p => p.theme.colors.accent};
   :hover,
   :focus {
@@ -29,12 +33,16 @@ export const SecondaryTitle = styled.h3`
 `;
 
 export const Text = styled.p`
-  font-size: ${p => p.theme.fontSizes[0]}px;
+  font-size: ${p => p.theme.fontSizes[1]}px;
   font-weight: ${p => p.theme.fontWeights.middle};
   color: ${p => p.theme.colors.text};
-  /* margin-left: ${p => p.theme.space[5]}px;
-  margin-right: ${p => p.theme.space[5]}px;
-  margin-bottom: ${p => p.theme.space[5]}px; */
+  margin-top: 0;
 `;
 
-
+export const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 180px;
+  margin: auto;
+`;

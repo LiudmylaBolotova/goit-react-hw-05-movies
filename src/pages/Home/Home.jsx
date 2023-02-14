@@ -4,11 +4,10 @@ import { Title, Items, ItemsLink } from './Home.styled';
 import axios from 'axios';
 import { BASE_URL, KEY, PARAM_FILMS_DAY } from 'pages/Services';
 
-
 const Home = () => {
   const [items, setItems] = useState([]);
   const location = useLocation();
-  
+
   useEffect(() => {
     axios
       .get(`${BASE_URL}${PARAM_FILMS_DAY}${KEY}`)
@@ -18,18 +17,16 @@ const Home = () => {
 
   return (
     <main>
-      <div>
-        <Title>Trending today</Title>
-        <ul>
-          {items.map(item => (
-            <Items key={item.id}>
-              <ItemsLink to={`/movies/${item.id}`} state={{ from: location }}>
-                {item.title}
-              </ItemsLink>
-            </Items>
-          ))}
-        </ul>
-      </div>
+      <Title>Trending today</Title>
+      <ul>
+        {items.map(item => (
+          <Items key={item.id}>
+            <ItemsLink to={`/movies/${item.id}`} state={{ from: location }}>
+              {item.title}
+            </ItemsLink>
+          </Items>
+        ))}
+      </ul>
     </main>
   );
 };

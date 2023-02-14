@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Link, useLocation, useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, KEY, IMG_URL, MOVIE, PARAMS_LANGUAGE } from 'pages/Services';
-
+import Loader from '../Loader/Loader';
 
 import {
   Container,
@@ -48,7 +48,7 @@ const MovieDetails = () => {
   return (
     <Container>
       <Link to={backLinkHref}>
-        <StyledArrowLeftSquareFill size='50'/>
+        <StyledArrowLeftSquareFill size="50" />
       </Link>
 
       {searchMovie && (
@@ -84,7 +84,9 @@ const MovieDetails = () => {
                 </LinksDetails>
               </li>
             </ul>
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </SectionLinks>
         </>
       )}

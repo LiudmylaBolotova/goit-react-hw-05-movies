@@ -81,7 +81,6 @@ export const SearchFormInput = styled.input`
 `;
 
 export const Item = styled.li`
-
   margin-bottom: ${p => p.theme.space[4]}px;
   border: ${p => p.theme.borders.normal};
   box-shadow: 0px 5px 12px -5px;
@@ -93,4 +92,11 @@ export const ItemLink = styled(NavLink)`
   font-size: ${p => p.theme.fontSizes[1]}px;
   font-weight: ${p => p.theme.fontWeights.bold};
   color: ${p => p.theme.colors.text};
+`;
+
+export const Alert = styled.p`
+  font-size: ${p => p.theme.fontSizes[2]}px;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  color: ${p => p.theme.colors.accent};
+  margin-left: ${p => p.theme.space[9]}px;
 `;
