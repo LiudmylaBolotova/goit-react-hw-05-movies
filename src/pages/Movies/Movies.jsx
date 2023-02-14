@@ -5,8 +5,8 @@ import axios from 'axios';
 import { ImSearch } from 'react-icons/im';
 import { BASE_URL, KEY, PARAM_SEARCH_MOVIE } from 'pages/Services';
 import {
-  Items,
-  ItemsLink,
+  Item,
+  ItemLink,
   SearchBar,
   SearchForm,
   SearchFormButton,
@@ -17,7 +17,6 @@ import {
 const Movies = () => {
   const [query, setQuery] = useState('');
   const [ListItems, setListItems] = useState([]);
-  // const location = useLocation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -52,7 +51,6 @@ const Movies = () => {
 
   return (
     <div>
-      
       <SearchBar>
         <SearchForm onSubmit={onSubmitForm}>
           <SearchFormButton type="submit">
@@ -69,11 +67,9 @@ const Movies = () => {
       {ListItems && (
         <ul>
           {ListItems.map(item => (
-            <Items key={item.id}>
-              <ItemsLink to={`/movies/${item.id}`}>
-                {item.title}
-              </ItemsLink>
-            </Items>
+            <Item key={item.id}>
+              <ItemLink to={`/movies/${item.id}`}>{item.title}</ItemLink>
+            </Item>
           ))}
         </ul>
       )}

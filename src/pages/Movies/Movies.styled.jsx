@@ -80,7 +80,7 @@ export const SearchFormInput = styled.input`
   }
 `;
 
-export const Items = styled.li`
+export const Item = styled.li`
 
   margin-bottom: ${p => p.theme.space[4]}px;
   border: ${p => p.theme.borders.normal};
@@ -88,7 +88,7 @@ export const Items = styled.li`
   background-color: ${p => p.theme.colors.twoBackgroundColor};
 `;
 
-export const ItemsLink = styled(NavLink)`
+export const ItemLink = styled(NavLink)`
   text-decoration: none;
   font-size: ${p => p.theme.fontSizes[1]}px;
   font-weight: ${p => p.theme.fontWeights.bold};

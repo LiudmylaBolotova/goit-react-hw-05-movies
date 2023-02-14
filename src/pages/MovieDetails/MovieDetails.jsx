@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
-import { BASE_URL, KEY, IMG_URL } from 'pages/Services';
-import { BsFillArrowLeftSquareFill } from 'react-icons/bs';
+import { BASE_URL, KEY, IMG_URL, MOVIE, PARAMS_LANGUAGE } from 'pages/Services';
+
+
 import {
   Container,
   PrimaryTitle,
@@ -10,8 +11,9 @@ import {
   Img,
   Text,
   Section,
-  LinkCast,
-  LinkReviews,
+  SectionLinks,
+  LinksDetails,
+  StyledArrowLeftSquareFill,
 } from './MovieDetails.styled';
 
 const MovieDetails = () => {
@@ -33,7 +35,7 @@ const MovieDetails = () => {
     async function fetchData() {
       try {
         const res = await axios.get(
-          `${BASE_URL}/movie/${movieId}?${KEY}&language=en-US`
+          `${BASE_URL}${MOVIE}${movieId}?${KEY}${PARAMS_LANGUAGE}`
         );
         setSearchMovie(res.data);
       } catch (error) {
@@ -46,7 +48,7 @@ const MovieDetails = () => {
   return (
     <Container>
       <Link to={backLinkHref}>
-        <BsFillArrowLeftSquareFill />
+        <StyledArrowLeftSquareFill size='50'/>
       </Link>
 
       {searchMovie && (
@@ -69,16 +71,21 @@ const MovieDetails = () => {
             </div>
           </Section>
 
-          <div>
+          <SectionLinks>
+            <SecondaryTitle>Additional information</SecondaryTitle>
+
             <ul>
               <li>
-                <LinkCast />
+                <LinksDetails to={`/movies/${movieId}/cast`}>Cast</LinksDetails>
               </li>
               <li>
-                <LinkReviews />
+                <LinksDetails to={`/movies/${movieId} /reviews`}>
+                  Reviews
+                </LinksDetails>
               </li>
             </ul>
-          </div>
+            <Outlet />
+          </SectionLinks>
         </>
       )}
     </Container>

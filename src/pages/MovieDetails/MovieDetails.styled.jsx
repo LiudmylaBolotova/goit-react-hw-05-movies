@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BsFillArrowLeftSquareFill } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -25,7 +26,9 @@ export const SecondaryTitle = styled.h2`
   }
 `;
 
-export const Img = styled.img``;
+export const Img = styled.img`
+  margin-right: ${p => p.theme.space[8]}px;
+`;
 
 export const Text = styled.p`
   font-size: ${p => p.theme.fontSizes[1]}px;
@@ -36,13 +39,32 @@ export const Text = styled.p`
 
 export const Section = styled.div`
   display: flex;
-  justify-content: space-evenly;
 `;
 
-export const LinkCast = styled(NavLink)`
-  
+export const SectionLinks = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-export const LinkReviews = styled(NavLink)`
-  
+export const LinksDetails = styled(NavLink)`
+  font-size: ${p => p.theme.fontSizes[1]}px;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  color: ${p => p.theme.colors.text};
+  width: ${p => p.theme.sizes.width[4]}px;
+  :hover,
+  :focus {
+    color: ${p => p.theme.colors.accent};
+  }
+`;
+
+export const StyledArrowLeftSquareFill = styled(BsFillArrowLeftSquareFill)`
+  color: ${p => p.theme.colors.accent};
+
+  margin-top: ${p => p.theme.space[5]}px;
+  margin-bottom: ${p => p.theme.space[5]}px;
+
+  :hover,
+  :focus {
+    color: ${p => p.theme.colors.text};
+  }
 `;
