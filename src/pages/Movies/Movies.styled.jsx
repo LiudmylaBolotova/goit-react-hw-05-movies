@@ -98,6 +98,7 @@ export const Alert = styled.p`
   font-size: ${p => p.theme.fontSizes[2]}px;
   font-weight: ${p => p.theme.fontWeights.bold};
   color: ${p => p.theme.colors.accent};
-  margin-left: ${p => p.theme.space[9]}px;
+  margin-left: ${p => p.theme.space[10]}px;
   margin-top: ${p => p.theme.space[7]}px;
+  
 `;
