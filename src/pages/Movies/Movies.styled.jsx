@@ -89,7 +89,7 @@ export const Item = styled.li`
 
 export const ItemLink = styled(NavLink)`
   text-decoration: none;
-  font-size: ${p => p.theme.fontSizes[1]}px;
+  font-size: ${p => p.theme.fontSizes[2]}px;
   font-weight: ${p => p.theme.fontWeights.bold};
   color: ${p => p.theme.colors.text};
 `;
@@ -99,4 +99,5 @@ export const Alert = styled.p`
   font-weight: ${p => p.theme.fontWeights.bold};
   color: ${p => p.theme.colors.accent};
   margin-left: ${p => p.theme.space[9]}px;
+  margin-top: ${p => p.theme.space[7]}px;
 `;

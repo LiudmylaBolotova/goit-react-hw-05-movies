@@ -20,7 +20,7 @@ export const theme = {
     bold: 700,
   },
 
-  space: [0, 2, 4, 10, 12, 20, 24, 30, 50, 350],
+  space: [0, 2, 4, 10, 12, 20, 24, 30, 50, 350, 570],
 
   borders: {
     normal: '1px solid #D3D3D3',
