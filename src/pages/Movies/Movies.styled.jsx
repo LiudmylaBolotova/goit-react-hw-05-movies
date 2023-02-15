@@ -100,5 +100,4 @@ export const Alert = styled.p`
   color: ${p => p.theme.colors.accent};
   margin-left: ${p => p.theme.space[10]}px;
   margin-top: ${p => p.theme.space[7]}px;
-  
 `;

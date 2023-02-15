@@ -39,9 +39,7 @@ const Reviews = () => {
           </Section>
         ))
       ) : (
-       
-          <Alert>We don't have any reviews for this movie.</Alert>
-        
+        <Alert>We don't have any reviews for this movie.</Alert>
       )}
     </>
   );
