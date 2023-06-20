@@ -61,11 +61,7 @@ const Movies = () => {
             <ImSearch />
             <SearchFormButtonLabel>Search</SearchFormButtonLabel>
           </SearchFormButton>
-          <SearchFormInput
-            type="text"
-            name="query"
-            placeholder="Search film"
-          ></SearchFormInput>
+          <SearchFormInput type="text" name="query" placeholder="Search film" />
         </SearchForm>
       </SearchBar>
       {ListItems.length > 0 ? (
