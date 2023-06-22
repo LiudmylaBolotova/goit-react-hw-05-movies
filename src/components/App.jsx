@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
+import Loader from './Loader/Loader';
 import { lazy, Suspense } from 'react';
-import Loader from '../pages/Loader/Loader';
 
-const SharedLayout = lazy(() => import('pages/SharedLayout'));
+const SharedLayout = lazy(() => import('components/SharedLayout'));
 const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
 const MovieDetails = lazy(() => import('pages/MovieDetails'));
 const NotFound = lazy(() => import('pages/Home'));
-const Cast = lazy(() => import('pages/Cast'));
-const Reviews = lazy(() => import('pages/Reviews'));
+const Cast = lazy(() => import('components/Cast'));
+const Reviews = lazy(() => import('components/Reviews'));
 
 const App = () => {
   return (

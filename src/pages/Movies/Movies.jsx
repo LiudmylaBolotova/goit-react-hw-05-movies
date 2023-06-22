@@ -1,81 +1,50 @@
-import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import axios from 'axios';
-
-import { ImSearch } from 'react-icons/im';
-import { BASE_URL, KEY, PARAM_SEARCH_MOVIE } from 'pages/Services';
-import {
-  Item,
-  ItemLink,
-  SearchBar,
-  SearchForm,
-  SearchFormButton,
-  SearchFormButtonLabel,
-  SearchFormInput,
-  Alert,
-} from './Movies.styled';
+import { useState, useEffect, Suspense } from 'react';
+import { Outlet, useSearchParams } from 'react-router-dom';
+import SearchBar from './../../components/SearchBar/SearchBar';
+import MoviesList from '../../components/MoviesList/MoviesList';
+import Loader from '../../components/Loader/Loader';
+import { fetchMovie } from 'Services/services';
 
 const Movies = () => {
-  const [query, setQuery] = useState('');
-  const [ListItems, setListItems] = useState([]);
+  const [listItems, setListItems] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryName = searchParams.get('name') ?? '';
+
+  const updateQueryName = name => {
+    const nextParams = name !== '' ? { name } : {};
+    setSearchParams(nextParams);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
-    if (!query) {
+
+    (async function () {
+      try {
+        const finedMovies = await fetchMovie(queryName, {
+          signal: controller.signal,
+        });
+        setListItems(finedMovies);
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+
+    if (!queryName) {
       return;
     }
-
-    axios
-      .get(
-        `${BASE_URL}${PARAM_SEARCH_MOVIE}${KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
-        { signal: controller.signal }
-      )
-      .then(res => {
-        setListItems(res.data.results);
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
 
     return () => {
       controller.abort();
     };
-  }, [query]);
-
-  const onSubmitForm = event => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const query = form.elements.query.value;
-    if (query.trim() === '') {
-      return alert('Enter your request!');
-    }
-    setQuery(query);
-    form.reset();
-  };
+  }, [queryName]);
 
   return (
     <>
-      <SearchBar>
-        <SearchForm onSubmit={onSubmitForm}>
-          <SearchFormButton type="submit">
-            <ImSearch />
-            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
-          </SearchFormButton>
-          <SearchFormInput type="text" name="query" placeholder="Search film" />
-        </SearchForm>
-      </SearchBar>
-      {ListItems.length > 0 ? (
-        <ul>
-          {ListItems.map(item => (
-            <Item key={item.id}>
-              <ItemLink to={`/movies/${item.id}`}>{item.title}</ItemLink>
-            </Item>
-          ))}
-        </ul>
-      ) : (
-        <Alert>Enter your query in the search bar</Alert>
-      )}
-      <Outlet />
+      <SearchBar value={queryName} onChangeForm={updateQueryName} />
+      <MoviesList value={listItems} />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

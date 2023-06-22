@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const SearchBar = styled.div`
+
+export const Search = styled.div`
   top: 0;
   left: 0;
   position: sticky;

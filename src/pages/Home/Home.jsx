@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Title, Items, ItemsLink } from './Home.styled';
-import axios from 'axios';
-import { BASE_URL, KEY, PARAM_FILMS_DAY } from 'pages/Services';
+import { fetchDaysFilms } from 'Services/services';
 
 const Home = () => {
   const [items, setItems] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}${PARAM_FILMS_DAY}${KEY}`)
-      .then(res => setItems(res.data.results))
-      .catch(error => error.message);
+    (async function () {
+      try {
+        const finedDaysFilms = await fetchDaysFilms();
+        setItems(finedDaysFilms);
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, []);
 
   return (

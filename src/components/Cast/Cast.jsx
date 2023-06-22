@@ -1,15 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  BASE_URL,
-  KEY,
-  MOVIE,
-  PARAMS_CREDITS,
-  PARAMS_LANGUAGE,
-  IMG_URL,
-} from 'pages/Services';
-
+import { fetchCast, IMG_URL } from 'Services/services';
 import {
   ListActors,
   ItemActor,
@@ -24,18 +15,15 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    async function fetchCast() {
+    (async function () {
       try {
-        const res = await axios.get(
-          `${BASE_URL}${MOVIE}${movieId}${PARAMS_CREDITS}${KEY}${PARAMS_LANGUAGE}`
-        );
-        setCastActors(res.data.cast);
+        const finedCast = await fetchCast(movieId);
+        setCastActors(finedCast);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
-    }
-    fetchCast();
-  }, [castActors, movieId]);
+    })();
+  }, [movieId]);
 
   return (
     <>
@@ -58,7 +46,7 @@ const Cast = () => {
                   <img
                     src="https://via.placeholder.com/200x300"
                     alt="Not found"
-                  ></img>
+                  />
                 )}
               </ItemActor>
             );

@@ -1,13 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  BASE_URL,
-  KEY,
-  MOVIE,
-  PARAMS_REVIEWS,
-  PARAMS_LANGUAGE,
-} from 'pages/Services';
+import { fetchReviews } from 'Services/services';
 
 import { Section, SecondaryTitle, Text, Alert } from './Reviews.styled';
 
@@ -16,18 +9,15 @@ const Reviews = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    async function fetchCast() {
+    (async function () {
       try {
-        const res = await axios.get(
-          `${BASE_URL}${MOVIE}${movieId}${PARAMS_REVIEWS}${KEY}${PARAMS_LANGUAGE}&page=1`
-        );
-        setReviewsText(res.data.results);
+        const finedReviews = await fetchReviews(movieId);
+        setReviewsText(finedReviews);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
-    }
-    fetchCast();
-  }, [movieId, reviewsText]);
+    })();
+  }, [movieId]);
 
   return (
     <>
